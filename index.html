@@ -50,11 +50,13 @@
       <form class="add-items">
         <input type="text" name="item" placeholder="Item Name" required />
         <input type="submit" value="+ Add Item" />
+        <button class="deleteItem" type="button">- Delete Item</button>
       </form>
     </div>
 
     <script>
       const addItems = document.querySelector(".add-items");
+      const deleteItem = document.querySelector(".deleteItem");
       const itemsList = document.querySelector(".plates");
       const items = JSON.parse(localStorage.getItem("items")) || [];
 
@@ -96,9 +98,14 @@
         populateList(items, itemsList);
       };
 
+      const deleteItems = (e) => {
+        e.preventDefault();
+        localStorage.removeItem("items");
+      };
+
       addItems.addEventListener("submit", addItem);
       itemsList.addEventListener("click", toggleDone);
-
+      deleteItem.addEventListener("click", deleteItems);
       populateList(items, itemsList);
     </script>
   </body>
